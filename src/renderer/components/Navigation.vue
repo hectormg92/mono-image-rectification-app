@@ -36,48 +36,24 @@
             <v-list-tile-title>{{ item.title }}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+
+        <v-list-tile class="pt-0" @click="$store.dispatch('openImagesMenu', true)">
+          <v-list-tile-action>
+            <v-badge overlap color="orange">
+              <span slot="badge">{{images.length}}</span>
+              <v-icon>photo</v-icon>
+            </v-badge>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Imágenes</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
       </v-list>
-      <div v-show="!mini">
-        <v-card v-for="image in images" :key="image.id" class="mx-3 mt-3" light>
-          <v-card-title>{{getBasename(image.path)}}</v-card-title>
-          <v-card-media height="150px">
-            <img :src="image.path" alt="" style="width: 100%; height: 100%; object-fit: cover;">
-          </v-card-media>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-
-            <v-tooltip top>
-              <v-btn flat icon light 
-                @click="startCapturingControlPoints"
-                slot="activator"
-                :disabled="actualImage != image.path"
-              >
-                <v-icon>control_point</v-icon>
-              </v-btn>
-              <span>Puntos de control</span>
-            </v-tooltip>
-
-            <v-tooltip top>
-              <v-btn 
-                flat icon light 
-                @click="actualImage = image.path"
-                :disabled="actualImage == image.path"
-                slot="activator"
-              >
-                <v-icon>open_in_new</v-icon>
-              </v-btn>
-              <span>Abrir imagen</span>
-            </v-tooltip>
-
-          </v-card-actions>
-        </v-card>
-      </div>
     </v-navigation-drawer>
 </template>
 
 
 <script>
-  const nodePath = require('path')
   export default {
     data () {
       return {
@@ -90,17 +66,13 @@
     methods: {
       openMenuForSelectImages() {
         this.$electron.ipcRenderer.send('open-images-menu')
-      },
-      getBasename(p) {
-        return nodePath.basename(p)
-      },
-
-      startCapturingControlPoints() {
-        console.log('enabled')
       }
     },
 
     computed: {
+      images: {
+        get() { return this.$store.getters.images }
+      },
       drawer: {
         get() { return this.$store.getters.mainMenuOpened },
         set(opened) { this.$store.dispatch('openMainMenu', opened)}
@@ -109,13 +81,6 @@
         get() { return this.$store.getters.miniMenu },
         set(mini) { this.$store.dispatch('setMiniMenu', mini)}
       },
-      images: {
-        get() { return this.$store.getters.images }
-      },
-      actualImage: {
-        get() { return this.$store.getters.actualImage },
-        set(image) { this.$store.dispatch('setActualImage', image)}
-      }
     }
   }
 </script>

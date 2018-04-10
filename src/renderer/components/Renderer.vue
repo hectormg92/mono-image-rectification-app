@@ -30,6 +30,7 @@
       this.$watch(() => this.$store.getters.actualImage, this.processFile)
 
       // Resize
+      window.addEventListener('resize', this.onResize)
       this.$watch(() => this.$store.getters.mainMenuOpened, this.onResize)
       this.$watch(() => this.$store.getters.miniMenu, this.onResize)
 

@@ -1,21 +1,21 @@
 <template>
-
-  <div id="app">
-    <v-app>
-      <app-navigation></app-navigation>
-      <v-content style="max-height: 100vh;">
-          <router-view></router-view>
-        <!-- <v-container fill-height class="pa-0 ma-0" style="max-height: 100vh;">
-          <v-layout justify-center>
-          </v-layout>
-        </v-container> -->
-      </v-content>
-    </v-app>
-  </div>
+  <v-app>
+    <app-navigation></app-navigation>
+    <app-image-gallery></app-image-gallery>
+    <v-content style="max-height: 100vh;">
+      <router-view></router-view>
+      <!-- <v-container fill-height class="pa-0 ma-0" style="max-height: 100vh;">
+        <v-layout justify-center>
+        </v-layout>
+      </v-container> -->
+    </v-content>
+  </v-app>
 </template>
 
 <script>
+
   import AppNavigation from './components/Navigation'
+  import AppImageGallery from './components/ImageGallery'
 
   export default {
     name: 'patrimonio-electron-vue',
@@ -31,7 +31,8 @@
       })
     },
     components: {
-      AppNavigation
+      AppNavigation,
+      AppImageGallery
     },
     computed: {
       drawer: {
@@ -41,7 +42,3 @@
     }
   }
 </script>
-
-<style>
-  /* CSS */
-</style>

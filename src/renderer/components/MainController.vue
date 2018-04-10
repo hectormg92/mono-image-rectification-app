@@ -16,7 +16,7 @@
 </script>
 
 <style>
-  @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+  @import url('https://fonts.googleapis.com/css?family=Roboto');
 
   * {
     box-sizing: border-box;
@@ -24,17 +24,6 @@
     padding: 0;
   }
 
-  body { font-family: 'Source Sans Pro', sans-serif; }
-
-  #wrapper {
-    background:
-      radial-gradient(
-        ellipse at top left,
-        rgba(255, 255, 255, 1) 40%,
-        rgba(229, 229, 229, .9) 100%
-      );
-    height: 100vh;
-    width: 100vw;
-  }
-
+  body { font-family: 'Roboto', sans-serif; }
+  
 </style>
